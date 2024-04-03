@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     public int sum=0;
-    private TextView display;
+    private EditText display;
     private Button plus;
     private Button minus;
     private Button divide;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private Button ac;
     private Button equal;
     private Button credits;
+    public String st;
+    public int x;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,11 +39,54 @@ public class MainActivity extends AppCompatActivity {
         ac=findViewById(R.id.ac);
         equal=findViewById(R.id.equal);
         credits=findViewById(R.id.credits);
+
+
+        display.setText(null);
+        st=display.getText().toString();
+        sum=Integer.parseInt(st);
     }
+
+    public void plus (View view){
+        display.setText(null);
+        st=display.getText().toString();
+        x=Integer.parseInt(st);
+        sum=sum+x;
+    }
+
+    public void minus (View view){
+        display.setText(null);
+        st=display.getText().toString();
+        x=Integer.parseInt(st);
+        sum=sum-x;
+    }
+    public void divide (View view){
+        display.setText(null);
+        st=display.getText().toString();
+        x=Integer.parseInt(st);
+        if (x==0)
+            display.setText("error");
+        else
+            sum=sum/x;
+    }
+
+    public void multiply (View view){
+        display.setText(null);
+        st=display.getText().toString();
+        x=Integer.parseInt(st);
+        sum=sum*x;
+    }
+
+    public void equal (View view){
+        display.setText(sum);
+    }
+    public void ac (View view){
+        display.setText(null);
+        sum=0;
+    }
+
     public void credits (View view) {
         Intent si = new Intent( this, credits.class);
-        si.putExtra("last number:",sum);
+        si.putExtra("message", "sum:" + sum);
         startActivity(si);
-
     }
 }
